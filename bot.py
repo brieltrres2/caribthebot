@@ -8,9 +8,9 @@ import keep_alive
 keep_alive.keep_alive()
 load_dotenv()
 
-TOKEN = os.getenv("DISCORD_TOKEN")  # Replace with your new bot token
-
-# TOKEN = "MTM0NDAzMzAxNTI2NDk3Mjg1Mg.G4jrjQ.ve9QzkYYIsog-elGMqB1VRxbW6u90j9w9aJzUk"
+TOKEN = os.getenv("DISCORD_TOKEN")
+if not TOKEN:
+    raise ValueError("DISCORD_TOKEN environment variable is not set")
 
 intents = discord.Intents.default()
 intents.message_content = True  # Required for reading messages
