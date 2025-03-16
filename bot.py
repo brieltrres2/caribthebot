@@ -1,10 +1,11 @@
 import discord
 from discord.ext import commands
-import time
 import os
-import dotenv
 from dotenv import load_dotenv
+import keep_alive
 
+
+keep_alive.keep_alive()
 load_dotenv()
 
 TOKEN = os.getenv("DISCORD_TOKEN")  # Replace with your new bot token
@@ -31,12 +32,12 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx):
-    await ctx.send(f"Pong! **carib!** is online and ready to go!")
+    await ctx.send("Pong! **carib!** is online and ready to go!")
 
 # Slash command
 @tree.command(name="ping", description="Check bot response time")
 async def ping_slash(interaction: discord.Interaction):
-    await interaction.response.send_message(f"Pong! **carib!** is online and ready to go!")
+    await interaction.response.send_message("Pong! **carib!** is online and ready to go!")
 
 
 bot.run(TOKEN)
