@@ -2,13 +2,11 @@ import discord
 from discord.ext import commands
 import os
 from dotenv import load_dotenv
-import keep_alive
+from keep_alive import keep_alive
 
-
-keep_alive.keep_alive()
 load_dotenv()
 
-TOKEN = os.getenv("DISCORD_TOKEN")
+TOKEN = os.getenv("TOKEN")
 if not TOKEN:
     raise ValueError("DISCORD_TOKEN environment variable is not set")
 
@@ -17,6 +15,7 @@ intents.message_content = True  # Required for reading messages
 
 bot = commands.Bot(command_prefix="c!", intents=intents)
 tree = bot.tree  # Command tree for slash commands
+
 
 @bot.event
 async def on_ready():
@@ -34,10 +33,13 @@ async def on_ready():
 async def ping(ctx):
     await ctx.send("Pong! **carib!** is online and ready to go!")
 
+
 # Slash command
 @tree.command(name="ping", description="Check bot response time")
 async def ping_slash(interaction: discord.Interaction):
-    await interaction.response.send_message("Pong! **carib!** is online and ready to go!")
+    await interaction.response.send_message(
+        "Pong! **carib!** is online and ready to go!")
 
+keep_alive()
 
 bot.run(TOKEN)
